@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+    <body>
+        <style>
+            .player-options img, .enemy-options img{
+                max-width: 200px;
+                margin-left: 25%;
+                opacity: 0.3;
+                cursor: pointer;
+            }
+
+            .player-options, .enemy-options{
+                width: 50%;
+            }
+
+            .align{
+                display: flex;
+            }
+        </style>
+
+        <h1 style="text-align: center;">Rock, Paper, Scissors!</h1>
+        <h2 style="text-align: center;" class="winner"></h2>
+        <hr>
+        <div class="align">
+            <div class="player-options">
+                <div><img opt=rock src="./img/rock.png" /></div>
+                <div><img opt="paper" src="./img/paper.png" /></div>
+                <div><img opt="scissors" src="./img/scissors.png" /></div>
+            </div>
+            <div class="enemy-options">
+                <div><img opt=rock src="./img/rock.png" /></div>
+                <div><img opt=paper src="./img/paper.png" /></div>
+                <div><img opt=scissors src="./img/scissors.png" /></div>
+            </div>
+        </div>
+
+        <script>
+            var elements = document.querySelectorAll('.player-options div > img');
+            var playerOpt = "";
+            var enemyOptions = "";
+
+            function victoryValidation(){
+                let winner = document.querySelector(".winner");
+
+                if(playerOpt == 'rock'){
+                    if(enemyOpt == 'rock'){
+                        winner.innerHTML = "Draw";
+                    }else if(enemyOpt == 'paper'){
+                        winner.innerHTML = "Winner: Enemy";
+                    }else if(enemyOpt == 'scissors'){
+                        winner.innerHTML = "Winner: Player";
+                    }
+                }
+
+                if(playerOpt == 'paper'){
+                    if(enemyOpt == 'rock'){
+                        winner.innerHTML = "Winner: Player";
+                    }else if(enemyOpt == 'paper'){
+                        winner.innerHTML = "Draw";
+                    }else if(enemyOpt == 'scissors'){
+                        winner.innerHTML = "Winner: Enemy";
+                    }
+                }
+                
+                if(playerOpt == 'scissors'){
+                    if(enemyOpt == 'rock'){
+                        winner.innerHTML = "Winner: Enemy";
+                    }else if(enemyOpt == 'paper'){
+                        winner.innerHTML = "Winner: Player";
+                    }else if(enemyOpt == 'scissors'){
+                        winner.innerHTML = "Draw";
+                    }
+                }
+            }
+
+            function resetOpacityEnemy(){
+                const enemyOptions = document.querySelectorAll('.enemy-options div');
+                for(var i=0; i < enemyOptions.length; i++){
+                    enemyOptions[i].childNodes[0].style.opacity = 0.3;
+                }
+            }
+
+            function enemyPlay(){
+                let rand = Math.floor(Math.random()*3);
+                const enemyOptions = document.querySelectorAll('.enemy-options div');
+                resetOpacityEnemy();
+
+                for(var i=0; i < enemyOptions.length; i++){
+                    if(i == rand){
+                        enemyOptions[i].childNodes[0].style.opacity = 1;
+                        enemyOpt = enemyOptions[i].childNodes[0].getAttribute('opt');
+                    }
+                }
+
+                victoryValidation();
+            }
+
+            function resetOpacityPlayer(){
+                for(var i=0; i < elements.length; i++){
+                    elements[i].style.opacity = 0.3;
+                }
+            }
+
+            for(var i=0; i < elements.length; i++){
+                elements[i].addEventListener('click',function(t){
+                    resetOpacityPlayer();
+                    t.target.style.opacity=1;
+                    playerOpt = t.target.getAttribute('opt');
+
+                    enemyPlay();
+                });
+            }
+        </script>
+    </body>
+</html>

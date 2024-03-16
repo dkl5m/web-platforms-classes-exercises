@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <head>
+        <link href="./css/style.css" rel="stylesheet"/>
+    </head>
+
+    <body>
+        <header>        
+            <h2>Supermarket's List Web-App</h2>
+        </header>
+
+        <div class="register-list">
+            <input type="text" placeholder="product name..." name="product-name" />
+            <input type="number" name="product-price" step="0.01" title="This should be a number with up to 2 decimal places"/>
+            <input type="submit" name="action" value="Register" />
+        </div>
+
+        <div class="product-list"></div>
+
+        <div class="product-sum">
+            <h2>Total: R$ 0</h2>
+        </div>
+
+        <div class="buttom">
+            <button name="clear">Clear</button>
+        </div>
+    
+        <script src="./js/supermarket-list.js"></script>
+    </body>
+</html>
